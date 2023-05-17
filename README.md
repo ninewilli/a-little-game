@@ -1,4 +1,4 @@
-# a-little-game
+# Play by running the main function
 to java i create a little game
 # try to use java to write a game
 if i have tiem i will remake it if i have time இ௰இ 
