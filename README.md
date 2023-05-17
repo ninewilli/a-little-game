@@ -1,3 +1,4 @@
+# java小游戏
 # Play by running the main function
 to java i create a little game
 # try to use java to write a game
