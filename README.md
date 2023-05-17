@@ -1,6 +1,10 @@
 # a-little-game
 to java i create a little game
 # try to use java to write a game
-because of the final test is coming, I have to review,so i have no time to draw and write
-i will remake it if i have time இ௰இ 
-thank you for your star
+if i have tiem i will remake it if i have time இ௰இ 
+# thank you for your star
+# gameplay
+# 1.Up, down to control character movement
+# 2.left and right to control character movement
+I was gonna make a music game but I didn't have time
+# 3.The enemy behaves in three ways
