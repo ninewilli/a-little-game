@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.*;
-import java.io.File;
+import java.io.*;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,7 +16,6 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -48,6 +47,7 @@ class BackgroundImage extends JPanel{
 
 public class GUI extends JFrame{
     String sws = "192.168.72.43";
+    String ss = "";
     BackgroundImage bgi = null;
     JButton jHistory = null,jbStartUp = null,jbStop = null,jbPlay = null,jbDuo1 = null,jbDuo2 = null;
     Font font=new Font("宋体",Font.BOLD,36);
@@ -63,6 +63,29 @@ public class GUI extends JFrame{
     int begin2 = 0;
     private static Thread ts;
     private static Thread ts1;
+    public void duqv(){
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream( System.getProperty("user.dir")+"\\src"+"\\history.txt");
+            byte[] bytes = new byte[18];
+            int readCount = 0;
+            while((readCount = fis.read(bytes)) != -1) {
+                ss = new String(bytes, 0, readCount);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
     public void plays() throws IOException{
         DatagramSocket ds = new DatagramSocket();
         byte[] bys = s.getBytes();
@@ -173,6 +196,8 @@ public class GUI extends JFrame{
     public void begin() {
         ImageIcon titltIcon = new ImageIcon("movement2.png");
         this.setIconImage(titltIcon.getImage());
+        duqv();
+        JLabel jt2 = new JLabel("最高分:"+ss);
         bgi = new BackgroundImage();
         bgi.setLayout(null);
         jHistory = new JButton("历史记录");
@@ -194,12 +219,17 @@ public class GUI extends JFrame{
         jbPlay.setFont(font);
         jbStartUp.setFont(font);
         jt.setFont(font1);
+        jt2.setFont(font1);
         jHistory.setFocusPainted(false);
         jHistory.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                test t1 = new test();t1.begin();
-                GUI.super.dispose();
+                for(int i=0;i<6;i++){
+                    bgi.remove(0);
+                }
+                bgi.add(jt2);
+                jt2.setBounds(470,200,800,160);
+                bgi.repaint();
             }
         });
         jbStartUp.addActionListener(new ActionListener() {

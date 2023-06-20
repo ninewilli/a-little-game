@@ -68,6 +68,10 @@ public class picture {
     int enemy_state14 = 0;
     int enemy_state15 = 0;
     int people_state1 = 0;
+    int chuguai_x = 800;
+    int chuguai_y = 100;
+    int guizhe_x = 800;
+    int guizhe_y = 100;
     Mycanvas_picture drawArea = new Mycanvas_picture();
     Image image = null;
     public Image background1 = Toolkit.getDefaultToolkit().getImage(getClass().getResource("movement2.png"));
@@ -99,6 +103,10 @@ public class picture {
     public Image act4 = Toolkit.getDefaultToolkit().getImage(getClass().getResource("act4.png"));
     public Image act5 = Toolkit.getDefaultToolkit().getImage(getClass().getResource("act5.png"));
     public Image kuang = Toolkit.getDefaultToolkit().getImage(getClass().getResource("kuang.png"));
+    public Image guizhe = Toolkit.getDefaultToolkit().getImage(getClass().getResource("guizhe.png"));
+    public Image chuguai = Toolkit.getDefaultToolkit().getImage(getClass().getResource("chuguai.png"));
+    public Image heal = Toolkit.getDefaultToolkit().getImage(getClass().getResource("health.png"));
+    int gui_state = 0;
     class Mycanvas_picture extends Canvas{
         public void paint(Graphics g){
             String s = String.valueOf(score);
@@ -112,8 +120,20 @@ public class picture {
                 ig.drawImage(background,0,0,1600,800,this);
                 ig.drawImage(background1,back_x,back_y,300,300,this);
                 ig.drawImage(background1,back_x1,back_y1,300,300,this);
+                if(gui_state==1){
+                    ig.drawImage(guizhe,guizhe_x,guizhe_y,500,800,this);
+                }
+                else if(gui_state==2){
+                    ig.drawImage(chuguai,chuguai_x,chuguai_y,500,800,this);
+                }
                 ig.drawImage(flying,bee_x,bee_y,200,200,this);
                 ig.drawImage(kuang,1300,0,300,200,this);
+                for(int i=0;i<max(3-health,0);i++){
+                    if(gui_state == 2){
+                        continue;
+                    }
+                    ig.drawImage(heal,10+i*50,10,100,100,this);
+                }
                 ig.setFont(new Font("华文行楷",Font.PLAIN,100));
                 ig.setColor(Color.BLACK);
                 ig.drawString(s,1400,130);

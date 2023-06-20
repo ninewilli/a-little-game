@@ -1105,6 +1105,9 @@ public class test {
                     speed_2 = 2;
                     speed_3 = 1;
                 }
+                if(q_time==2000){
+                    p.gui_state = 0;
+                }
                 if(q_time==9999){
                     speed_1 = 6;
                     speed_2 = 3;
@@ -1130,6 +1133,7 @@ public class test {
             init();
         }
         public void init(){
+            p.gui_state = 1;
             picture_move();
             t=new Thread(new Runnable(){
                 public void run(){

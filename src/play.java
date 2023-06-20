@@ -274,6 +274,7 @@ public class play {
         }
     }
     public void init(){
+        p.gui_state = 2;
         p.people_x = -200;
         picture_move();
         t=new Thread(new Runnable(){
