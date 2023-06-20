@@ -15,6 +15,7 @@ public class duoren {
     Frame fr = new Frame();
     private Button btn1 = new Button();
     Socket socket;
+    String sws = "192.168.72.43";
     int x2_p1 = 0;
     int x2_p2 = 0;
     int x2_p3 = 0;
@@ -232,7 +233,7 @@ public class duoren {
         DatagramSocket ds = new DatagramSocket();
         byte[] bys = s.getBytes();
         int length = bys.length;
-        InetAddress address = InetAddress.getByName("10.120.120.131");
+        InetAddress address = InetAddress.getByName(sws);
         int port = 12345;
         DatagramPacket dp = new DatagramPacket(bys,length,address,port);
         ds.send(dp);
@@ -272,7 +273,7 @@ public class duoren {
         DatagramSocket ds = new DatagramSocket();
         byte[] bys = s.getBytes();
         int length = bys.length;
-        InetAddress address = InetAddress.getByName("10.120.120.131");
+        InetAddress address = InetAddress.getByName(sws);
         int port = 12321;
         DatagramPacket dp = new DatagramPacket(bys,length,address,port);
         ds.send(dp);
