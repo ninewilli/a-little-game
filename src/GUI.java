@@ -48,7 +48,7 @@ class BackgroundImage extends JPanel{
 
 public class GUI extends JFrame{
     BackgroundImage bgi = null;
-    JButton jbStartUp = null,jbStop = null,jbPlay = null,jbDuo1 = null,jbDuo2 = null;
+    JButton jHistory = null,jbStartUp = null,jbStop = null,jbPlay = null,jbDuo1 = null,jbDuo2 = null;
     Font font=new Font("宋体",Font.BOLD,36);
     Font font1=new Font("宋体",Font.BOLD,100);
     JLabel jt = new JLabel("play game");
@@ -66,14 +66,14 @@ public class GUI extends JFrame{
         DatagramSocket ds = new DatagramSocket();
         byte[] bys = s.getBytes();
         int length = bys.length;
-        InetAddress address = InetAddress.getByName("10.120.69.168");
-        int port = 12000;
+        InetAddress address = InetAddress.getByName("10.120.120.131");
+        int port = 1200;
         DatagramPacket dp = new DatagramPacket(bys,length,address,port);
         ds.send(dp);
         ds.close();
     }
     public void reserve() throws IOException{
-        DatagramSocket ds = new DatagramSocket(12300);
+        DatagramSocket ds = new DatagramSocket(1230);
         byte[] bys = new byte[1024];
         DatagramPacket dp = new DatagramPacket(bys,bys.length);
         ds.receive(dp);
@@ -88,14 +88,14 @@ public class GUI extends JFrame{
         DatagramSocket ds = new DatagramSocket();
         byte[] bys = s.getBytes();
         int length = bys.length;
-        InetAddress address = InetAddress.getByName("10.120.69.168");
-        int port = 12300;
+        InetAddress address = InetAddress.getByName("10.120.120.131");
+        int port = 1230;
         DatagramPacket dp = new DatagramPacket(bys,length,address,port);
         ds.send(dp);
         ds.close();
     }
     public void reserve1() throws IOException{
-        DatagramSocket ds = new DatagramSocket(12000);
+        DatagramSocket ds = new DatagramSocket(1200);
         byte[] bys = new byte[1024];
         DatagramPacket dp = new DatagramPacket(bys,bys.length);
         ds.receive(dp);
@@ -114,18 +114,25 @@ public class GUI extends JFrame{
             }catch(Exception e){
                 e.printStackTrace();
             }
-            if(begin1==1){
-                try {
-                    reserve();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+            if(begin1==0){
+                continue;
             }
+            try {
+                reserve();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            System.out.println(num1);
             if(num1==1&&num2==1){
                 duoren d1 = null;
                 d1 = new duoren();
                 d1.people_sizes = 1;
                 d1.begin();
+                try {
+                    plays();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 GUI.super.dispose();
                 break;
             }
@@ -138,18 +145,25 @@ public class GUI extends JFrame{
             }catch(Exception e){
                 e.printStackTrace();
             }
-            if(begin2==1){
-                try {
-                    reserve1();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+            if(begin2==0){
+                continue;
             }
+            try {
+                reserve1();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            System.out.println(num1);
             if(num1==1&&num2==1){
                 duoren d1 = null;
                 d1 = new duoren();
                 d1.people_sizes = 2;
                 d1.begin();
+                try {
+                    plays1();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 GUI.super.dispose();
                 break;
             }
@@ -160,22 +174,26 @@ public class GUI extends JFrame{
         this.setIconImage(titltIcon.getImage());
         bgi = new BackgroundImage();
         bgi.setLayout(null);
+        jHistory = new JButton("历史记录");
         jbStartUp = new JButton("启动");
         jbDuo1 = new JButton("以P1进行多人游戏");
         jbDuo2 = new JButton("以P2进行多人游戏");
         jbPlay = new JButton("写关卡");
         jbStop = new JButton("退出");
+        jHistory.setContentAreaFilled(false);
         jbStartUp.setContentAreaFilled(false);
         jbDuo1.setContentAreaFilled(false);
         jbDuo2.setContentAreaFilled(false);
         jbPlay.setContentAreaFilled(false);
         jbStop.setContentAreaFilled(false);
+        jHistory.setFont(font);
         jbStop.setFont(font);
         jbDuo1.setFont(font);
         jbDuo2.setFont(font);
         jbPlay.setFont(font);
         jbStartUp.setFont(font);
         jt.setFont(font1);
+        jHistory.setFocusPainted(false);
         jbStartUp.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -188,6 +206,11 @@ public class GUI extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 num2 = 1;
                 begin1 = 1;
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
                 try {
                     plays();
                 } catch (IOException ex) {
@@ -207,6 +230,11 @@ public class GUI extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 num1 = 1;
                 begin2 = 1;
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
                 try {
                     plays1();
                 } catch (IOException ex) {
@@ -235,12 +263,14 @@ public class GUI extends JFrame{
                 GUI.super.dispose();
             }
         });
+        bgi.add(jHistory);
         bgi.add(jt);
         bgi.add(jbStartUp);
         bgi.add(jbDuo1);
         bgi.add(jbDuo2);
         bgi.add(jbPlay);
         bgi.add(jbStop);
+        jHistory.setBounds(610,50,370,60);
         jt.setBounds(550,110,570,160);
         jbStartUp.setBounds(610,310,370,60);
         jbDuo1.setBounds(610,390,370,60);
@@ -268,4 +298,5 @@ public class GUI extends JFrame{
         this.setVisible(true);
     }
 }
+
 

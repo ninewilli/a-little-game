@@ -232,7 +232,7 @@ public class duoren {
         DatagramSocket ds = new DatagramSocket();
         byte[] bys = s.getBytes();
         int length = bys.length;
-        InetAddress address = InetAddress.getByName("10.120.69.168");
+        InetAddress address = InetAddress.getByName("10.120.120.131");
         int port = 12345;
         DatagramPacket dp = new DatagramPacket(bys,length,address,port);
         ds.send(dp);
@@ -272,7 +272,7 @@ public class duoren {
         DatagramSocket ds = new DatagramSocket();
         byte[] bys = s.getBytes();
         int length = bys.length;
-        InetAddress address = InetAddress.getByName("10.120.69.168");
+        InetAddress address = InetAddress.getByName("10.120.120.131");
         int port = 12321;
         DatagramPacket dp = new DatagramPacket(bys,length,address,port);
         ds.send(dp);
@@ -1659,7 +1659,6 @@ public class duoren {
             }
         });
         draw();
-        t.start();
         t1.start();
         t2.start();
         t3.start();
