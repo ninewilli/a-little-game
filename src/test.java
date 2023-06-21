@@ -935,18 +935,22 @@ public class test {
                     if(change_x15==2){
                         p.enemy_state12 = 0;
                         change_x15 = 0;
+                        p.emeny_sp_y1 = -200;
                     }
                     if(change_x16==2){
                         p.enemy_state13 = 0;
                         change_x16 = 0;
+                        p.emeny_sp_y2 = 900;
                     }
                     if(change_x17==2){
                         p.enemy_state14 = 0;
                         change_x17 = 0;
+                        p.emeny_sp_y3 = -200;
                     }
                     if(change_x18==2){
                         p.enemy_state15 = 0;
                         change_x18 = 0;
+                        p.emeny_sp_y4 = 900;
                     }
                 }
                 else if(q_time%1000 == 0){

@@ -48,6 +48,8 @@ class BackgroundImage extends JPanel{
 public class GUI extends JFrame{
     String sws = "192.168.72.43";
     String ss = "";
+    ImageIcon icon1=new ImageIcon("back.jpg" );
+    JLabel jlabel1=new JLabel();
     BackgroundImage bgi = null;
     JButton jHistory = null,jbStartUp = null,jbStop = null,jbPlay = null,jbDuo1 = null,jbDuo2 = null;
     Font font=new Font("宋体",Font.BOLD,36);
@@ -220,6 +222,7 @@ public class GUI extends JFrame{
         jbStartUp.setFont(font);
         jt.setFont(font1);
         jt2.setFont(font1);
+        jlabel1.setFont(font1);
         jHistory.setFocusPainted(false);
         jHistory.addActionListener(new ActionListener() {
             @Override
