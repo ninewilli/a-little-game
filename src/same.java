@@ -3,7 +3,7 @@ import java.awt.*;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 
-public class picture{
+public class same {
     int score = 0;
     int health = 0;
     int end_play = 0;
@@ -72,21 +72,12 @@ public class picture{
     int chuguai_y = 100;
     int guizhe_x = 800;
     int guizhe_y = 100;
-    int jie_shu_x = 2000;
-    int jie_shu_y = 30;
-    int xingxing_1 = 2000;
-    int xingxing_2 = 2000;
-    int xingxing_3 = 2000;
-    int xingxing_y = 60;
     Mycanvas_picture drawArea = new Mycanvas_picture();
     Image image = null;
-    public Image xingxing = Toolkit.getDefaultToolkit().getImage(getClass().getResource("xingxing.png"));
-    public Image jieshu = Toolkit.getDefaultToolkit().getImage(getClass().getResource("jieshu.png"));
     public Image background1 = Toolkit.getDefaultToolkit().getImage(getClass().getResource("movement2.png"));
     public Image people1 = Toolkit.getDefaultToolkit().getImage(getClass().getResource("main.png"));
     public Image people2 = Toolkit.getDefaultToolkit().getImage(getClass().getResource("act.png"));
     public Image background = Toolkit.getDefaultToolkit().getImage(getClass().getResource("back.jpg"));
-    public Image background2 = Toolkit.getDefaultToolkit().getImage(getClass().getResource("beijing1.jpg"));
     public Image flying = Toolkit.getDefaultToolkit().getImage(getClass().getResource("be.png"));
     public Image boom_l1 = Toolkit.getDefaultToolkit().getImage(getClass().getResource("emeny.png"));
     public Image boom_l2 = Toolkit.getDefaultToolkit().getImage(getClass().getResource("emeny.png"));
@@ -116,8 +107,6 @@ public class picture{
     public Image chuguai = Toolkit.getDefaultToolkit().getImage(getClass().getResource("chuguai.png"));
     public Image heal = Toolkit.getDefaultToolkit().getImage(getClass().getResource("health.png"));
     int gui_state = 0;
-    int string_x = 2000;
-    int string_y = 100;
     class Mycanvas_picture extends Canvas{
         public void paint(Graphics g){
             String s = String.valueOf(score);
@@ -150,13 +139,6 @@ public class picture{
                 ig.drawString(s,1400,130);
                 draw_people(ig);
                 draw_enemy(ig);
-                ig.drawImage(jieshu,jie_shu_x,jie_shu_y,900,900,this);
-                ig.drawImage(xingxing,xingxing_1,xingxing_y,200,200,this);
-                ig.drawImage(xingxing,xingxing_2,xingxing_y,200,200,this);
-                ig.drawImage(xingxing,xingxing_3,xingxing_y,200,200,this);
-                ig.setFont(new Font("华文行楷",Font.PLAIN,100));
-                ig.setColor(Color.BLACK);
-                ig.drawString("您的分数为："+s,string_x,string_y);
                 g.drawImage(image, 0, 0, null);
             }
         }

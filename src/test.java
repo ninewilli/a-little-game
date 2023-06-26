@@ -1,8 +1,5 @@
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -11,6 +8,7 @@ import java.util.Random;
 
 public class test {
         Frame fr = new Frame();
+        public Image biao = Toolkit.getDefaultToolkit().getImage(getClass().getResource("biaoti.png"));
         private Button btn1 = new Button();
         int k = 0;
         int k3 = 0;
@@ -855,7 +853,7 @@ public class test {
             });
         }
         Font font=new Font("宋体",Font.BOLD,36);
-        int q_time = 0;
+        int q_time;
         public void time(){
             while(true){
                 p.score = score;
@@ -864,6 +862,16 @@ public class test {
                     Thread.sleep(5);
                 }catch(Exception e){
                     e.printStackTrace();
+                }
+                if(p.health >= 3){
+                    p.string_x = 400;
+                    p.string_y = 300;
+                    p.xingxing_1 = 350;
+                    p.xingxing_2 = 650;
+                    p.xingxing_3 = 950;
+                    p.jie_shu_x = 300;
+                    p.drawArea.repaint();
+                    p = new picture();
                 }
                 q_time++;
                 p.people_state = state_demo;
@@ -1130,10 +1138,193 @@ public class test {
                 }
             }
         }
+    MenuBar menuBar= new MenuBar();
+    Menu fileMenu = new Menu("操作");
+    Menu editMenu = new Menu("速度");
+    Menu beginMenu = new Menu("关卡进度");
+    Menu formatMenu = new Menu("速度调整");
+    Menu cotMenu = new Menu("关卡设置");
+    MenuItem rej = new MenuItem("重新开始");
+    MenuItem end = new MenuItem("结束游戏");
+    MenuItem auto = new MenuItem("开始");
+    MenuItem copy = new MenuItem("退出");
+    MenuItem paste = new MenuItem("暂停");
+    MenuItem tingzhi = new MenuItem("停止");
+    MenuItem costom1 = new MenuItem("跳到第一关");
+    MenuItem costom2 = new MenuItem("跳到第二关");
+    MenuItem costom3 = new MenuItem("跳到第三关");
+    MenuItem costom4 = new MenuItem("跳到第四关");
+    MenuItem comment = new MenuItem("速度*2");
+    MenuItem cancelComment = new MenuItem("速度*4");
+    Font font1=new Font("宋体",Font.BOLD,12);
         public void begin(){
             for(int i=0;i<=20;i++){
                 arr.add(0);
             }
+            copy.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.exit(0);
+                }
+            });
+            end.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.exit(0);
+                }
+            });
+            costom1.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    q_time = 0;
+                    p = new picture();
+                }
+            });
+            costom2.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    q_time = 19990;
+                }
+            });
+            costom3.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    q_time = 99990;
+                }
+            });
+            costom4.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    q_time = 199990;
+                }
+            });
+            paste.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    t.stop();
+                    t1.stop();
+                    t2.stop();
+                    t3.stop();
+                    t4.stop();
+                    t5.stop();
+                }
+            });
+            auto.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    t=new Thread(new Runnable(){
+                        public void run(){
+                            obstacle_move();
+                        }
+                    });
+                    t1=new Thread(new Runnable(){
+                        public void run(){
+                            while(true) {
+                                if (model_re == 0) {
+                                    sp_enemy_move();
+                                } else if (model_re == 2) {
+                                    enemy1_move();
+                                } else {
+                                    enemy_move();
+                                }
+                            }
+                        }
+                    });
+                    t2=new Thread(new Runnable(){
+                        public void run(){
+                            time();
+                        }
+                    });
+                    t3=new Thread(new Runnable(){
+                        public void run(){
+                            movement();
+                        }
+                    });
+                    t4=new Thread(new Runnable(){
+                        public void run(){
+                            duqv();
+                        }
+                    });
+                    t5=new Thread(new Runnable(){
+                        public void run(){
+                            obstacle_move1();
+                        }
+                    });
+                    draw();
+                    t.start();
+                    t1.start();
+                    t2.start();
+                    t3.start();
+                    t4.start();
+                    t5.start();
+                }
+            });
+            tingzhi.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    speed_0 = 0;
+                    speed_1 = 0;
+                    speed_2 = 0;
+                    speed_3 = 0;
+                }
+            });
+            comment.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    speed_0 = 2*speed_0;
+                    speed_1 = 2*speed_1;
+                    speed_2 = 2*speed_2;
+                    speed_3 = 2*speed_3;
+                }
+            });
+            cancelComment.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    speed_0 = 4*speed_0;
+                    speed_1 = 4*speed_1;
+                    speed_2 = 4*speed_2;
+                    speed_3 = 4*speed_3;
+                }
+            });
+            comment.setFont(font1);
+            cancelComment.setFont(font1);
+            auto.setFont(font1);
+            copy.setFont(font1);
+            paste.setFont(font1);
+            formatMenu.setFont(font1);
+            editMenu.setFont(font1);
+            menuBar.setFont(font1);
+            beginMenu.setFont(font1);
+            rej.setFont(font1);
+            end.setFont(font1);
+            formatMenu.add(comment);
+            formatMenu.add(new MenuItem("-"));
+            formatMenu.add(cancelComment);
+            fileMenu.add(copy);
+            fileMenu.add(new MenuItem("-"));
+            fileMenu.add(auto);
+            fileMenu.add(new MenuItem("-"));
+            fileMenu.add(paste);
+            editMenu.add(tingzhi);
+            editMenu.add(new MenuItem("-"));
+            editMenu.add(formatMenu);
+            beginMenu.add(costom1);
+            beginMenu.add(new MenuItem("-"));
+            beginMenu.add(costom2);
+            beginMenu.add(new MenuItem("-"));
+            beginMenu.add(costom3);
+            beginMenu.add(new MenuItem("-"));
+            beginMenu.add(costom4);
+            cotMenu.add(rej);
+            cotMenu.add(new MenuItem("-"));
+            cotMenu.add(end);
+            menuBar.add(fileMenu);
+            menuBar.add(editMenu);
+            menuBar.add(beginMenu);
+            menuBar.add(cotMenu);
+            menuBar.setFont(font1);
+            fr.setMenuBar(menuBar);
+            fr.setTitle("游戏开始");
             init();
         }
         public void init(){
@@ -1151,7 +1342,7 @@ public class test {
                             sp_enemy_move();
                         } else if (model_re == 2) {
                             enemy1_move();
-                        } else {
+                        } else if(model_re == 1) {
                             enemy_move();
                         }
                     }

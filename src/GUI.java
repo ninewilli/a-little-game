@@ -46,16 +46,19 @@ class BackgroundImage extends JPanel{
 }
 
 public class GUI extends JFrame{
+
+    MenuBar menu= new MenuBar();
     String sws = "192.168.72.43";
     String ss = "";
     ImageIcon icon1=new ImageIcon("back.jpg" );
     JLabel jlabel1=new JLabel();
     BackgroundImage bgi = null;
-    JButton jHistory = null,jbStartUp = null,jbStop = null,jbPlay = null,jbDuo1 = null,jbDuo2 = null;
+    JButton jHistory = null,jbStartUp = null,jbStop = null,jbPlay = null,jbDuo1 = null,jbDuo2 = null,jbBut1 = null,jbBut2 = null,jbBut3 = null,jbBut4 = null;
     Font font=new Font("宋体",Font.BOLD,36);
     Font font1=new Font("宋体",Font.BOLD,100);
     JLabel jt = new JLabel("play game");
     JLabel jt1 = new JLabel("匹配中");
+    public Image biao = Toolkit.getDefaultToolkit().getImage(getClass().getResource("biaoti.png"));
     int begin = 0;
     private int num = 0;
     String s = "1";
@@ -196,6 +199,7 @@ public class GUI extends JFrame{
         }
     }
     public void begin() {
+        this.setIconImage(new ImageIcon("biaoti.png").getImage());
         ImageIcon titltIcon = new ImageIcon("movement2.png");
         this.setIconImage(titltIcon.getImage());
         duqv();
@@ -208,12 +212,22 @@ public class GUI extends JFrame{
         jbDuo2 = new JButton("以P2进行多人游戏");
         jbPlay = new JButton("写关卡");
         jbStop = new JButton("退出");
+
+        jbBut1 = new JButton("第一关");
+        jbBut2 = new JButton("第二关");
+        jbBut3 = new JButton("第三关");
+        jbBut4 = new JButton("第四关");
+
         jHistory.setContentAreaFilled(false);
         jbStartUp.setContentAreaFilled(false);
         jbDuo1.setContentAreaFilled(false);
         jbDuo2.setContentAreaFilled(false);
         jbPlay.setContentAreaFilled(false);
         jbStop.setContentAreaFilled(false);
+        jbBut1.setContentAreaFilled(false);
+        jbBut2.setContentAreaFilled(false);
+        jbBut3.setContentAreaFilled(false);
+        jbBut4.setContentAreaFilled(false);
         jHistory.setFont(font);
         jbStop.setFont(font);
         jbDuo1.setFont(font);
@@ -223,6 +237,10 @@ public class GUI extends JFrame{
         jt.setFont(font1);
         jt2.setFont(font1);
         jlabel1.setFont(font1);
+        jbBut1.setFont(font);
+        jbBut2.setFont(font);
+        jbBut3.setFont(font);
+        jbBut4.setFont(font);
         jHistory.setFocusPainted(false);
         jHistory.addActionListener(new ActionListener() {
             @Override
@@ -235,11 +253,58 @@ public class GUI extends JFrame{
                 bgi.repaint();
             }
         });
+        jbBut1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                test t1 = new test();
+                t1.q_time = 0;
+                t1.begin();
+                GUI.super.dispose();
+            }
+        });
+        jbBut2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                test t1 = new test();
+                t1.q_time = 1990;
+                t1.begin();
+                GUI.super.dispose();
+            }
+        });
+        jbBut3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                test t1 = new test();
+                t1.q_time = 99990;
+                t1.begin();
+                GUI.super.dispose();
+            }
+        });
+        jbBut4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                test t1 = new test();
+                t1.p.background = t1.p.background2;
+                t1.q_time = 199990;
+                t1.begin();
+                GUI.super.dispose();
+            }
+        });
         jbStartUp.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                test t1 = new test();t1.begin();
-                GUI.super.dispose();
+                for(int i=0;i<6;i++){
+                    bgi.remove(0);
+                }
+                bgi.add(jbBut1);
+                bgi.add(jbBut2);
+                bgi.add(jbBut3);
+                bgi.add(jbBut4);
+                jbBut1.setBounds(610,310,370,60);
+                jbBut2.setBounds(610,390,370,60);
+                jbBut3.setBounds(610,470,370,60);
+                jbBut4.setBounds(610,550,370,60);
+                bgi.repaint();
             }
         });
         jbDuo1.addActionListener(new ActionListener() {
